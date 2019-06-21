@@ -53,11 +53,14 @@ app.get('/restaurants/:id', (req, res) => {
 
 app.get('/search', (req, res) => {
     const keyword = req.query.keyword
-    const restaurants = restaurant_list.results.filter(restaurant => {
-        return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
+    Restaurant.find((err, all_restaurants) => {
+        // 把Restaurant model所有的資料都抓回來
+        if (err) return console.error(err)
+        const restaurants = all_restaurants.filter(restaurant => {
+            return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
+        })
+        return res.render('index', { restaurants: restaurants, keyword: keyword })
     })
-
-    res.render('index', { restaurants: restaurants, keyword: keyword })
 })
 
 app.listen(port, () => {
