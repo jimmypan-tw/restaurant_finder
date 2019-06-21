@@ -45,8 +45,6 @@ app.get('/', (req, res) => {
 app.get('/restaurants/:id', (req, res) => {
     Restaurant.findById(req.params.id, (err, restaurant) => {
         if (err) return console.error(err)
-        console.log("params: ", req.params)
-        console.log("restaurant: ", restaurant)
         return res.render('show', { restaurant: restaurant })
     })
 })
