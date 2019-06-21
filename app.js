@@ -49,6 +49,17 @@ app.get('/restaurants/:id', (req, res) => {
     })
 })
 
+// 刪除 Restaurant
+app.post('/restaurants/:id/delete', (req, res) => {
+    Todo.findById(req.params.id, (err, todo) => {
+        if (err) return console.error(err)
+        todo.remove(err => {
+            if (err) return console.error(err)
+            return res.redirect('/')
+        })
+    })
+})
+
 app.get('/search', (req, res) => {
     const keyword = req.query.keyword
     Restaurant.find((err, all_restaurants) => {
