@@ -1,10 +1,6 @@
 // Include express from node_modules
 const express = require('express')
 const app = express()
-
-// include json file
-//restaurant_list = require('./models/seeds/restaurant.json')
-
 // Define server related variables
 const port = 3001
 
@@ -15,6 +11,13 @@ const exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(express.static('static'))
+
+// 引用body-parser
+const bodyParser = require('body-parser')
+
+// 設定body-parser
+app.use(bodyParser.urlencoded({ extended: true }))
+
 
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1/restaurant', { useNewUrlParser: true })
@@ -30,18 +33,22 @@ db.once('open', () => {
 const Restaurant = require('./models/restaurant.js')
 
 
-
 // routes settings
 app.get('/', (req, res) => {
-    res.render('index', { restaurants: restaurant_list.results })
+    Restaurant.find((err, restaurants) => {
+        // 把Restaurant model所有的資料都抓回來
+        if (err) return console.error(err)
+        return res.render('index', { restaurants: restaurants })
+    })
 })
 
-app.get('/restaurants/:restaurant_id', (req, res) => {
-    const restaurant = restaurant_list.results.find(restaurant => {
-        return restaurant.id.toString() === req.params.restaurant_id
+app.get('/restaurants/:id', (req, res) => {
+    Restaurant.findById(req.params.id, (err, restaurant) => {
+        if (err) return console.error(err)
+        console.log("params: ", req.params)
+        console.log("restaurant: ", restaurant)
+        return res.render('show', { restaurant: restaurant })
     })
-    console.log('restaurant: ', restaurant)
-    res.render('show', { restaurant: restaurant })
 })
 
 app.get('/search', (req, res) => {
