@@ -42,6 +42,33 @@ app.get('/', (req, res) => {
     })
 })
 
+// 新增一筆 restaurant 的資料頁面
+app.get('/restaurants/new', (req, res) => {
+    return res.render('new')
+})
+
+// 新增一筆 restaurant
+app.post('/restaurants', (req, res) => {
+    const restaurant = new Restaurant({
+        name: req.body.name,
+        name_en: req.body.name_en,
+        category: req.body.category,
+        phone: req.body.phone,
+        location: req.body.location,
+        google_map: req.body.google_map,
+        rating: req.body.rating,
+        image: req.body.image,
+        description: req.body.description
+    })
+
+    restaurant.save(err => {
+        if (err) return console.error(err)
+        return res.redirect('/')
+    })
+})
+
+
+// 檢視一筆 restaurant 詳細資料
 app.get('/restaurants/:id', (req, res) => {
     Restaurant.findById(req.params.id, (err, restaurant) => {
         if (err) return console.error(err)
@@ -49,11 +76,19 @@ app.get('/restaurants/:id', (req, res) => {
     })
 })
 
-// 刪除 Restaurant
-app.post('/restaurants/:id/delete', (req, res) => {
-    Todo.findById(req.params.id, (err, todo) => {
+// 修改一筆 restaurant 的資料
+app.get('/restaurants/:id/edit', (req, res) => {
+    Restaurant.findById(req.params.id, (err, restaurant) => {
         if (err) return console.error(err)
-        todo.remove(err => {
+        return res.render('edit', { restaurant: restaurant })
+    })
+})
+
+// 刪除一筆 restaurant
+app.post('/restaurants/:id/delete', (req, res) => {
+    Restaurant.findById(req.params.id, (err, restaurant) => {
+        if (err) return console.error(err)
+        restaurant.remove(err => {
             if (err) return console.error(err)
             return res.redirect('/')
         })
