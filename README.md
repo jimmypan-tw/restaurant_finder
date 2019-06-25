@@ -6,8 +6,8 @@
 + Node.js v10.16.0
 + Express v4.17.1
 + Express-handlebars v3.1.0
-+ method-override : ^3.0.0
-+ mongoose : ^5.6.0
++ method-override : v3.0.0
++ mongoose : v5.6.0
 
 ## 安裝過程
 1. 下載檔案
