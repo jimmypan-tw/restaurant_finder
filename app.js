@@ -18,10 +18,6 @@ const bodyParser = require('body-parser')
 // 設定body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// 引用 method-override
-const methodOverride = require('method-override')
-// 設定 method-override
-app.use(methodOverride('_method'))
 
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1/restaurant', { useNewUrlParser: true })
