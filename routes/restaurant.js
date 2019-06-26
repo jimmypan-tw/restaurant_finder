@@ -54,6 +54,7 @@ router.put('/:id', (req, res) => {
         if (err) return console.error(err)
         console.log("req.params: ", req.params)
         console.log("req.body: ", req.body)
+        // restaurant.id = req.params.id
         restaurant.name = req.body.name
         restaurant.name_en = req.body.name_en
         restaurant.category = req.body.category
