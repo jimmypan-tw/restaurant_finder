@@ -52,19 +52,18 @@ router.get('/:id/edit', (req, res) => {
 router.put('/:id', (req, res) => {
     Restaurant.findById(req.params.id, (err, restaurant) => {
         if (err) return console.error(err)
-        const edit_restaurant = new Restaurant({
-            name: req.body.name,
-            name_en: req.body.name_en,
-            category: req.body.category,
-            phone: req.body.phone,
-            location: req.body.location,
-            google_map: req.body.google_map,
-            rating: req.body.rating,
-            image: req.body.image,
-            description: req.body.description
-        })
-
-        edit_restaurant.save(err => {
+        console.log("req.params: ", req.params)
+        console.log("req.body: ", req.body)
+        restaurant.name = req.body.name
+        restaurant.name_en = req.body.name_en
+        restaurant.category = req.body.category
+        restaurant.phone = req.body.phone
+        restaurant.location = req.body.location
+        restaurant.google_map = req.body.google_map
+        restaurant.rating = req.body.rating
+        restaurant.image = req.body.image
+        restaurant.description = req.body.description
+        restaurant.save(err => {
             if (err) return console.error(err);
             return res.redirect(`/restaurants/${req.params.id}`)
         })
