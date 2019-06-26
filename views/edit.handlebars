@@ -47,7 +47,7 @@
             <div class="form-group row">
                 <label class="col">
                     評分:<small>(<i class="fas fa-star-of-life text-danger"></i>)</small>
-                    <input type="number" class="form-control" name="rating" placeholder="1-5"
+                    <input type="number" class="form-control" name="rating" placeholder="1-5" min="0" max="5" step="0.1"
                         value="{{restaurant.rating}}" required>
                 </label>
                 <label class="col">
