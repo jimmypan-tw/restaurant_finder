@@ -28,10 +28,7 @@ router.get('/sort', (req, res) => {
             }).sort({ name_en: -1 })
             break
         case 'category':
-            let categories = {
-                $or: [{ "category": "中東料理" }, { "category": "日式料理" }, { "category": "義式料理" }, { "category": "美式料理" }, { "category": "酒吧" }, { "category": "咖啡" }, { "category": "中式料理" }, { "category": "韓式料理" }]
-            }
-            Restaurant.find(categories, (err, restaurants) => {
+            Restaurant.find((err, restaurants) => {
                 if (err) return console.error(err)
                 return res.render('index', { restaurants })
             }).sort({ category: 1 })
