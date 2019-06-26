@@ -35,6 +35,12 @@ header {
     color: #9b4b4b;
 }
 
+.search-bar .search-bar-inner .btn-group {
+    float: right;
+    margin: 6px auto;
+}
+
+
 .form-control::placeholder {
     color: #aaaaaa;
     font-size: 0.8rem;
@@ -105,4 +111,13 @@ header {
 
 .card:hover {
     background-color: rgb(239, 230, 253);
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
 }

@@ -1,25 +1,33 @@
 <!-- ./views/index.handlebars -->
 <!-- search bar -->
 <div class="container search-bar">
-    <form action="/search">
-        <div class="search-bar-outer">
-            <div class="search-bar-inner">
-                <h4 class="mb-2">尋找餐廳：</h4>
-                <div class="input-group">
-                    <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類"
-                        aria-label="Restaurant Name..." value="{{keyword}}" aria-describedby="search-button">
-                    <div class="input-group-append">
-                        <button class="btn btn-major" type="submit" id="search-button">Search
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+    <div class="search-bar-outer">
+        <div class="search-bar-inner">
+
+            <h4 class="mb-2">尋找餐廳：</h4>
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">排序方式</button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="/restaurants/sort?atoz">A→Z</a>
+                    <a class="dropdown-item" href="/restaurants/sort?ztoa">Z→A</a>
+                    <a class="dropdown-item" href="/restaurants/sort?category">依類別</a>
+                    <a class="dropdown-item" href="/restaurants/sort?rating">評價由高到低</a>
                 </div>
             </div>
+
+            <form action="/restaurants/search" method="GET">
+                <div class="input-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類、關鍵字描述"
+                        aria-label="Restaurant Name..." value="" aria-describedby="search-button" value={{keyword}}>
+                    <div class="input-group-append">
+                        <button class="btn btn-major" type="submit" id="search-button"><i
+                                class="fas fa-search"></i></i></button>
+                    </div>
+                </div>
+            </form>
         </div>
-
-    
-
-    </form>
+    </div>
 </div>
 
 <!-- restaurant list -->
